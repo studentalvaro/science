@@ -26,10 +26,14 @@ const router = createRouter({
     },
     {
       path: '/contacto',
-      name: 'Sobre Nosotros',
+      name: 'Contacto',
       component: () => import('../views/ContactoView.vue'),
     },
-    
+    {
+      path: '/aboutus',
+      name: 'Sobre Nosotros',
+      component: () => import('../views/SobreNosotrosView.vue'),
+    },
   ],
 })
 

@@ -5,7 +5,7 @@
     <header class="bg-light py-3 shadow-sm">
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
             <RouterLink to="/" class="d-flex align-items-center mb-2 mb-md-0">
-                <img src="../images/logo_resized.jpg" alt="TheScienceHub" width="80px">
+                <img src="@/images/logo_resized.jpg" alt="TheScienceHub" width="80px">
             </RouterLink>
             
             <div class="d-flex align-items-center">
@@ -15,7 +15,6 @@
             <div class="d-flex justify-content-center flex-wrap">
                 <RouterLink to="/login" class="btn btn-primary btn-sm me-2 mb-2 mb-md-0">Iniciar sesión</RouterLink>
                 <RouterLink to="/registro" class="btn btn-outline-primary btn-sm me-2 mb-2 mb-md-0">Registrarse</RouterLink>
-                <button v-if="propSesion" @click="cerrarSesion" class="btn btn-danger btn-sm mb-2 mb-md-0">Cerrar Sesión</button>
             </div>
         </div>
     </header>

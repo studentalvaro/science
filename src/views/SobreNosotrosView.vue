@@ -2,7 +2,7 @@
 </script>
 
 <template>
-<h1>Contacto view</h1>
+<h1>About Us view</h1>
 </template>
 
 <style scoped></style>

@@ -2,26 +2,29 @@
 </script>
 
 <template>
-    <footer class="bg-light shadow-sm footer-container py-4 mt-5">
-        <div class="container text-center">
-            <!-- Sección de derechos de autor -->
-            <p class="copyright">&copy; Realizado por Álvaro Beltrán Santiago. Todos los derechos reservados.</p>
+  <footer class="bg-light shadow-sm py-4">
+    <div class="container text-center">
+      <!-- Sección de derechos de autor -->
+      <p class="mb-3 text-muted">
+        &copy; Realizado por Álvaro Beltrán Santiago. Todos los derechos reservados.
+      </p>
 
-            <!-- Enlaces -->
-            <div class="footer-links">
-                <router-link to="/" class="footer-link">Inicio</router-link>
-                <router-link to="/" class="footer-link">News</router-link>
-                <router-link to="/contacto" class="footer-link">Contacto</router-link>
-            </div>
+      <!-- Enlaces -->
+      <div class="mb-3">
+        <router-link to="/" class="text-primary mx-2 text-decoration-none">Inicio</router-link>
+        <router-link to="/aboutus" class="text-primary mx-2 text-decoration-none">Sobre Nosotros</router-link>
+        <router-link to="/contacto" class="text-primary mx-2 text-decoration-none">Contacto</router-link>
+      </div>
 
-            <!-- Redes sociales -->
-            <div class="social-icons">
-                <a href="https://facebook.com" target="_blank" class="social-icon bi bi-facebook"></a>
-                <a href="https://twitter.com" target="_blank" class="social-icon bi bi-twitter"></a>
-                <a href="https://instagram.com" target="_blank" class="social-icon bi bi-instagram"></a>
-            </div>
-        </div>
-    </footer>
+      <!-- Redes sociales -->
+      <div>
+        <a href="https://facebook.com" target="_blank" class="text-primary fs-4 mx-2 bi bi-facebook"></a>
+        <a href="https://twitter.com" target="_blank" class="text-primary fs-4 mx-2 bi bi-twitter"></a>
+        <a href="https://instagram.com" target="_blank" class="text-primary fs-4 mx-2 bi bi-instagram"></a>
+      </div>
+    </div>
+  </footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
