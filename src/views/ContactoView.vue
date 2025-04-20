@@ -6,6 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <h1 class="mb-4 text-center">Contáctanos</h1>
+                <p class="lead text-muted text-center">Estamos abiertos a sugerencias e ideas nuevas. No importa si tienes una recomendación, duda o queja, te responderemos en un plazo de 24 horas.</p>
                 <form action="http://localhost/science/api/contacto.php" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre<span class="text-danger">*</span></label>

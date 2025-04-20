@@ -21,11 +21,11 @@ import { onMounted } from 'vue'
           </div>
             <!-- Imagen y texto -->
             <div class="row align-items-stretch mb-5">
-            <!-- Imagen -->
+              <!-- Imagen -->
             <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-stretch">
                 <img src="../images/logo.jpg" alt="Sobre Nosotros" class="img-fluid rounded shadow-sm w-100 object-fit-cover">
             </div>
-            <!-- Texto -->
+              <!-- Texto -->
             <div class="col-md-6 d-flex align-items-stretch">
                 <div class="bg-light p-4 rounded shadow-sm w-100">
                 <p>Somos una revista científica dedicada a la divulgación del conocimiento, con el objetivo de conectar investigadores, estudiantes y lectores apasionados por la ciencia.</p>
