@@ -1,29 +1,31 @@
-# science
 
-This template should help get you started developing with Vue 3 in Vite.
+# ProyectoFreeTours
 
-## Recommended IDE Setup
+Proyecto realizado por Álvaro Beltrán Santiago como proyecto final del grado superior de desarrollo
+de aplicaciones en IES Virgen del Carmen (Jaén).
+>[!NOTE]
+> Instrucciones de uso:
+>## Project Setup
+>```sh
+>npm install
+>```
+>## Compile and Hot-Reload for Development
+>```sh
+>npm run dev
+>```
+>## Compile and Minify for Production
+>```sh
+>npm run build
+>```
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+>[!TIP]
+> Tip
 
-## Customize configuration
+>[!IMPORTANT]
+> Important
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+>[!WARNING]
+> Warning
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+>[!CAUTION]
+> Caution

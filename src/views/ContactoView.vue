@@ -5,7 +5,7 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <h1 class="mb-4 text-center">Contáctanos</h1>
+                <h1 class="display-5 fw-bold text-primary text-center">Contáctanos</h1>
                 <p class="lead text-muted text-center">Estamos abiertos a sugerencias e ideas nuevas. No importa si tienes una recomendación, duda o queja, te responderemos en un plazo de 24 horas.</p>
                 <form action="http://localhost/science/api/contacto.php" method="POST">
                     <div class="mb-3">
