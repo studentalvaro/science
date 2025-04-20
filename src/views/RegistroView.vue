@@ -78,26 +78,29 @@ function registrarUsuario(e) {
       <h2 class="mb-4 text-center">Registro</h2>
 
       <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" id="nombre" v-model="form.nombre" class="form-control" required />
+        <label for="nombre" class="form-label">Nombre<span class="text-danger">*</span></label>
+        <input type="text" id="nombre" v-model="form.nombre" class="form-control"  placeholder="Nombre" required />
       </div>
 
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" v-model="form.email" class="form-control" required />
+        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+        <input type="email" id="email" v-model="form.email" class="form-control" placeholder="Email" required />
       </div>
 
       <div class="mb-3">
-        <label for="contrasena" class="form-label">Contraseña</label>
-        <input type="password" id="contrasena" v-model="form.contrasena" class="form-control" required />
+        <label for="contrasena" class="form-label">Contraseña<span class="text-danger">*</span></label>
+        <input type="password" id="contrasena" v-model="form.contrasena" class="form-control" placeholder="Contraseña" required />
       </div>
 
       <div class="mb-3">
-        <label for="contrasena2" class="form-label">Repetir contraseña</label>
-        <input type="password" id="contrasena2" v-model="form.contrasena2" class="form-control" required />
+        <label for="contrasena2" class="form-label">Repetir contraseña<span class="text-danger">*</span></label>
+        <input type="password" id="contrasena2" v-model="form.contrasena2" class="form-control" placeholder="Repetir contraseña" required />
       </div>
 
-      <p :style="{ color: colorMensaje }" class="mb-3 text-center">{{ mensaje }}</p>
+      <div v-if="mensaje" :class="{
+        'alert alert-danger': colorMensaje == 'red', //En caso de que sea red toma esta clase
+        'alert alert-success': colorMensaje == 'green', //En caso de que sea green toma esta clase
+      }" role="alert" :style="{ color: colorMensaje }" class="mb-3 text-center">{{ mensaje }}</div>
 
       <button type="submit" class="btn btn-primary w-100">Registrarse</button>
 
@@ -113,5 +116,9 @@ function registrarUsuario(e) {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+::placeholder {
+    color: #adb5bd;
+    opacity: 1;
 }
 </style>

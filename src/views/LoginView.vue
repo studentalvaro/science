@@ -36,12 +36,12 @@ function iniciarSesion(e) {
 
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" v-model="form.email" class="form-control" required />
+        <input type="email" id="email" v-model="form.email" class="form-control" placeholder="Email" required />
       </div>
 
       <div class="mb-3">
         <label for="contrasena" class="form-label">Contraseña</label>
-        <input type="password" id="contrasena" v-model="form.contrasena" class="form-control" required />
+        <input type="password" id="contrasena" v-model="form.contrasena" class="form-control" placeholder="Contraseña" required />
       </div>
 
       <p :style="{ color: colorMensaje }" class="mb-3 text-center">{{ mensaje }}</p>
@@ -60,5 +60,9 @@ function iniciarSesion(e) {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+::placeholder {
+    color: #adb5bd;
+    opacity: 1;
 }
 </style>
