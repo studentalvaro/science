@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 
 const form = ref({nombre: '',email: '',contrasena: '',contrasena2: ''})
 const mensaje = ref('')
-const colorMensaje = ref('black') //Como me daba error a veces lo he hecho reactivo.
+const colorMensaje = ref('') //Como me daba error a veces lo he hecho reactivo y puesto negro por defecto.
 const router = useRouter()
 
 //Función para comprobar si algún campo está vacío
@@ -39,7 +39,7 @@ function registrarUsuario(e) {
     contrasena: form.value.contrasena
   }
 
-  fetch('http://localhost/science/api/create_usuarios.php', {
+  fetch('http://localhost/science/api/usuarios/create_usuarios.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

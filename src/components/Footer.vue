@@ -3,6 +3,7 @@
 
 <template>
   <footer class="bg-light shadow-sm py-4">
+    
     <div class="container text-center">
       <!-- Sección de derechos de autor -->
       <p class="mb-3 text-muted">

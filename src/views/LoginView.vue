@@ -23,7 +23,34 @@ function iniciarSesion(e) {
       email: form.value.email,
       contrasena: form.value.contrasena
     }
-    //Aquí me falta el fetch
+  fetch('http://localhost/science/api/login.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(result => {
+  if (result.token) {
+    // Guardamos el JWT en localStorage
+    localStorage.setItem('token', result.token)
+    mensaje.value = 'Login exitoso'
+    colorMensaje.value = 'green'
+
+    // Redirigir al usuario a la página principal o dashboard
+    router.push('/dashboard')
+  } else {
+    mensaje.value = result.mensaje || 'Error al iniciar sesión'
+    colorMensaje.value = 'red'
+  }
+})
+.catch(error => {
+  console.error('Error:', error)
+  mensaje.value = 'Error en la conexión con el servidor'
+  colorMensaje.value = 'red'
+})
+
   }
 }
 </script>
