@@ -7,7 +7,9 @@ const mensaje = ref('')
 const colorMensaje = ref('black')
 const router = useRouter()
 
-//Función para comprobar si un campo está vacío
+// EMITIR el token al App.vue
+const emit = defineEmits(['iniciar-sesion'])
+
 function isEmpty(str) {
   return str.trim().length === 0
 }
@@ -33,15 +35,17 @@ function iniciarSesion(e) {
     .then(response => response.json())
     .then(result => {
       if (result.token) {
-        // Guardamos el JWT en localStorage
+        // Guardar token en localStorage
         localStorage.setItem('token', result.token)
         mensaje.value = 'Login exitoso'
         colorMensaje.value = 'green'
 
-        //Redirijimos
+        // Emitir token al padre
+        emit('iniciar-sesion', result.token)
+
         setTimeout(() => {
           router.push('/')
-        }, 3000)
+        }, 1000)
       } else {
         mensaje.value = result.mensaje || 'Error al iniciar sesión'
         colorMensaje.value = 'red'
@@ -72,11 +76,10 @@ function iniciarSesion(e) {
           <input type="password" id="contrasena" v-model="form.contrasena" class="form-control" placeholder="Contraseña" required />
         </div>
 
-        <!-- Mensaje de error o éxito -->
         <div v-if="mensaje" :class="{
             'alert alert-danger': colorMensaje == 'red', 
             'alert alert-success': colorMensaje == 'green'
-          }" role="alert" :style="{ color: colorMensaje }" class="mb-3 text-center">{{ mensaje }}</div>
+          }" role="alert" class="mb-3 text-center">{{ mensaje }}</div>
 
         <button type="submit" class="btn btn-primary w-100">Entrar</button>
 

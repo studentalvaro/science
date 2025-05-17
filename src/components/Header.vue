@@ -1,19 +1,23 @@
 <script setup>
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const sesionIniciada = ref(false)
+const props = defineProps({
+  datosSesion: {
+    type: Object,
+    default: null
+  },
+  token: {
+    type: String,
+    default: null
+  }
+});
 
-onMounted(() => {
-  // Al cargar la página, comprobamos si hay token
-  sesionIniciada.value = !!localStorage.getItem('token')
-})
+const emit = defineEmits(['cerrar-sesion']);
+const router = useRouter();
 
 function cerrarSesion() {
-  localStorage.removeItem('token')
-  sesionIniciada.value = false
-  router.push('/login')
+  emit('cerrar-sesion'); // Emitir evento para que App.vue maneje el cierre de sesión
+  router.push('/logout'); 
 }
 </script>
 
@@ -21,19 +25,21 @@ function cerrarSesion() {
   <header class="bg-light py-3 shadow-sm">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
       <RouterLink to="/" class="d-flex align-items-center mb-2 mb-md-0 text-decoration-none">
-        <img src="@/images/logo_resized.jpg" alt="TheScienceHub" width="80px">
+        <img src="@/images/logo_resized.jpg" alt="TheScienceHub" width="80px" />
         <h1 class="h2 text-primary text-decoration-none ps-4">The Science Hub</h1>
       </RouterLink>
 
-      <!-- Si está logueado, mostramos solo cerrar sesión -->
-      <div v-if="sesionIniciada" class="d-flex justify-content-center flex-wrap">
-        <button @click="cerrarSesion" class="btn btn-danger btn-sm">Cerrar sesión</button>
-      </div>
-
-      <!-- Si NO está logueado, mostramos login y registro -->
-      <div v-else class="d-flex justify-content-center flex-wrap">
-        <RouterLink to="/login" class="btn btn-primary btn-sm me-2 mb-2 mb-md-0">Iniciar sesión</RouterLink>
-        <RouterLink to="/registro" class="btn btn-outline-primary btn-sm me-2 mb-2 mb-md-0">Registrarse</RouterLink>
+      <div class="d-flex justify-content-center flex-wrap align-items-center">
+        <template v-if="token">
+          <span class="text-primary fw-semibold me-3">
+            Bienvenido, {{ datosSesion?.nombre || 'Usuario' }}
+          </span>
+          <button @click="cerrarSesion" class="btn btn-danger btn-sm">Cerrar sesión</button>
+        </template>
+        <template v-else>
+          <RouterLink to="/login" class="btn btn-primary btn-sm me-2 mb-2 mb-md-0">Iniciar sesión</RouterLink>
+          <RouterLink to="/registro" class="btn btn-outline-primary btn-sm me-2 mb-2 mb-md-0">Registrarse</RouterLink>
+        </template>
       </div>
     </div>
   </header>
