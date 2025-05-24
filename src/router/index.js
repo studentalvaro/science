@@ -42,12 +42,22 @@ const router = createRouter({
     {
       path: '/creararticulo',
       name: 'Crear Articulo',
-      component: () => import('../views/CrearArticuloView.vue'),
+      component: () => import('../views/PublicarArticuloView.vue'),
     },
     {
       path: '/gestionarcategorias',
       name: 'Gestionar Categorías',
       component: () => import('../views/GestionarCategoriasView.vue'),
+    },
+    {
+      path: '/gestionararticulos',
+      name: 'Gestionar Artículos',
+      component: () => import('../views/GestionarArticulosView.vue'),
+    },
+    {
+      path: '/articulos',
+      name: 'Artículos',
+      component: () => import('../views/ArticulosView.vue'),
     },
   ],
 })

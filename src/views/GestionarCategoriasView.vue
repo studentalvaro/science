@@ -204,21 +204,23 @@ function mostrarMensajeExito(texto) {
         <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>Acciones</th>
+          <th style="width: 120px; text-align: center;">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="categoria in categoriasPaginadas" :key="categoria.id">
           <td>{{ categoria.id }}</td>
           <td>{{ categoria.nombre }}</td>
-          <td>
-            <button class="btn btn-sm btn-primary me-2" @click="abrirModalEditar(categoria)">
+            <td>
+            <div class="d-flex">
+              <button class="btn btn-sm btn-primary w-50 me-1" @click="abrirModalEditar(categoria)">
               Editar
-            </button>
-            <button class="btn btn-sm btn-danger" @click="confirmarEliminacion(categoria)">
+              </button>
+              <button class="btn btn-sm btn-danger w-50 ms-1" @click="confirmarEliminacion(categoria)">
               Eliminar
-            </button>
-          </td>
+              </button>
+            </div>
+            </td>
         </tr>
       </tbody>
     </table>

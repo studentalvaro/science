@@ -61,8 +61,8 @@ function iniciarSesion(e) {
 </script>
 
 <template>
-  <div class="image-background">
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="image-background min-vh-100 d-flex flex-column">
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
       <form @submit="iniciarSesion" class="p-4 bg-white rounded shadow-sm w-100" style="max-width: 400px;">
         <h2 class="mb-4 text-center">Iniciar sesión</h2>
 
@@ -95,6 +95,10 @@ function iniciarSesion(e) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 ::placeholder {
   color: #adb5bd;

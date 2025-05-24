@@ -48,7 +48,7 @@ function handleIniciarSesion(nuevoToken) {
 
     <div class="main-content">
       <!-- Interceptar el evento desde el login -->
-      <RouterView @iniciar-sesion="handleIniciarSesion" />
+      <RouterView @iniciar-sesion="handleIniciarSesion" :usuario="datosSesion" />
     </div>
 
     <Footer />

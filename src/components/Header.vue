@@ -16,17 +16,17 @@ const emit = defineEmits(['cerrar-sesion']);
 const router = useRouter();
 
 function cerrarSesion() {
-  emit('cerrar-sesion'); // Emitir evento para que App.vue maneje el cierre de sesión
+  emit('cerrar-sesion'); //Emitimos un evento para que App.vue maneje el cierre de sesión
   router.push('/logout'); 
 }
 </script>
 
 <template>
-  <header class="bg-light py-3 shadow-sm">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+  <header class="bg-light py-3 shadow-sm w-100">
+    <div class="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start px-4">
       <RouterLink to="/" class="d-flex align-items-center mb-2 mb-md-0 text-decoration-none">
         <img src="@/images/logo_resized.jpg" alt="TheScienceHub" width="80px" />
-        <h1 class="h2 text-primary text-decoration-none ps-4">The Science Hub</h1>
+        <h1 class="h2 text-primary text-decoration-none ps-4 mb-0">The Science Hub</h1>
       </RouterLink>
 
       <div class="d-flex justify-content-center flex-wrap align-items-center">

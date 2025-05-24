@@ -5,6 +5,9 @@ import router from './router';
 // Importa Bootstrap CSS y JS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+
 
 const app = createApp(App);
 

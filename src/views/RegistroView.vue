@@ -72,8 +72,7 @@ function registrarUsuario(e) {
 </script>
 
 <template>
-<div class="image-background">
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="image-background flex-grow-1 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <form @submit="registrarUsuario" class="p-4 bg-white rounded shadow-sm w-100" style="max-width: 400px;">
       <h2 class="mb-4 text-center">Registro</h2>
 
@@ -98,8 +97,8 @@ function registrarUsuario(e) {
       </div>
 
       <div v-if="mensaje" :class="{
-        'alert alert-danger': colorMensaje == 'red', //En caso de que sea red toma esta clase
-        'alert alert-success': colorMensaje == 'green', //En caso de que sea green toma esta clase
+        'alert alert-danger': colorMensaje == 'red',
+        'alert alert-success': colorMensaje == 'green',
       }" role="alert" :style="{ color: colorMensaje }" class="mb-3 text-center">{{ mensaje }}</div>
 
       <button type="submit" class="btn btn-primary w-100">Registrarse</button>
@@ -107,18 +106,21 @@ function registrarUsuario(e) {
       <p class="mt-3 text-center">¿Ya tienes cuenta? <RouterLink to="/login" class="text-primary">Iniciar sesión</RouterLink></p>
     </form>
   </div>
-</div>
 </template>
 
 <style scoped>
- .image-background {
-    background-image: url('@/images/registro_image.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.image-background {
+  background-image: url('@/images/registro_image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 ::placeholder {
-    color: #adb5bd;
-    opacity: 1;
+  color: #adb5bd;
+  opacity: 1;
 }
 </style>

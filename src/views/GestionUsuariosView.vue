@@ -1,16 +1,18 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { jwtDecode } from 'jwt-decode'
 
 const usuarios = ref([])
 const error = ref('')
 const paginaActual = ref(1)
 const porPagina = 10
 const busqueda = ref('')
-
 const roles = ['lector', 'suscriptor', 'admin', 'autor']
+const usuarioAEliminar = ref(null)
+const usuarioAutenticadoId = ref(null)
+
 const token = localStorage.getItem('token')
 
-// Filtrar usuarios por nombre o email
 const usuariosFiltrados = computed(() => {
   if (!busqueda.value.trim()) return usuarios.value
   return usuarios.value.filter(usuario =>
@@ -33,6 +35,9 @@ function cambiarPagina(nuevaPagina) {
 }
 
 function cambiarRol(usuarioId, nuevoRol) {
+  const usuario = usuarios.value.find(u => u.id === usuarioId)
+  if (!usuario) return
+
   fetch('http://localhost/science/api/usuarios/update_usuario.php', {
     method: 'PUT',
     headers: {
@@ -46,17 +51,49 @@ function cambiarRol(usuarioId, nuevoRol) {
       const data = await res.json()
       if (!data.success) throw new Error(data.message || 'Error al actualizar el rol.')
 
-      const usuario = usuarios.value.find(u => u.id === usuarioId)
-      if (usuario) usuario.rol = nuevoRol
+      usuario.rol = nuevoRol // actualizar localmente
     })
     .catch(err => {
       error.value = err.message
     })
 }
 
+function pedirConfirmacion(usuario) {
+  usuarioAEliminar.value = usuario
+  const modal = new bootstrap.Modal(document.getElementById('confirmarEliminarUsuarioModal'))
+  modal.show()
+}
+
+function confirmarEliminacion() {
+  if (!usuarioAEliminar.value) return
+
+  fetch(`http://localhost/science/api/usuarios/delete_usuario.php?id=${usuarioAEliminar.value.id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) throw new Error(data.message || 'Error al eliminar el usuario.')
+      usuarios.value = usuarios.value.filter(u => u.id !== usuarioAEliminar.value.id)
+    })
+    .catch(err => {
+      error.value = err.message || 'No se pudo eliminar el usuario.'
+    })
+}
+
 onMounted(() => {
   if (!token) {
     error.value = 'No hay token de autenticación. Por favor, inicia sesión.'
+    return
+  }
+
+  try {
+    const decoded = jwtDecode(token)
+    usuarioAutenticadoId.value = decoded.id
+  } catch (e) {
+    error.value = 'Token inválido'
     return
   }
 
@@ -99,6 +136,7 @@ onMounted(() => {
             <th>Nombre</th>
             <th>Email</th>
             <th>Rol</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -108,13 +146,21 @@ onMounted(() => {
             <td>
               <select
                 :value="usuario.rol"
-                @change="cambiarRol(usuario.id, $event.target.value)"
+                @change="evento => cambiarRol(usuario.id, evento.target.value)"
                 class="form-select"
               >
-                <option v-for="rol in roles" :key="rol" :value="rol">
-                  {{ rol }}
-                </option>
+                <option v-for="rol in roles" :key="rol" :value="rol">{{ rol }}</option>
               </select>
+            </td>
+            <td class="text-center align-middle p-1">
+              <button
+                class="btn btn-danger btn-sm m-0"
+                @click="pedirConfirmacion(usuario)"
+                :disabled="usuario.id == usuarioAutenticadoId"
+                :title="usuario.id == usuarioAutenticadoId ? 'No puedes eliminarte a ti mismo' : 'Eliminar usuario'"
+              >
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
@@ -141,6 +187,31 @@ onMounted(() => {
       </nav>
     </div>
 
-    <p v-else class="text-center text-muted fst-italic">No hay usuarios que coincidan con la búsqueda.</p>
+    <p v-else class="text-center text-muted fst-italic">
+      No hay usuarios que coincidan con la búsqueda.
+    </p>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmarEliminarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar al usuario
+            <strong>{{ usuarioAEliminar?.nombre }}</strong>?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="confirmarEliminacion">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+</style>
