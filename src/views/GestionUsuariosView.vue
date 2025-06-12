@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { jwtDecode } from 'jwt-decode'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const usuarios = ref([])
 const error = ref('')
@@ -10,8 +13,6 @@ const busqueda = ref('')
 const roles = ['lector', 'suscriptor', 'admin', 'autor']
 const usuarioAEliminar = ref(null)
 const usuarioAutenticadoId = ref(null)
-
-const token = localStorage.getItem('token')
 
 const usuariosFiltrados = computed(() => {
   if (!busqueda.value.trim()) return usuarios.value
@@ -35,6 +36,7 @@ function cambiarPagina(nuevaPagina) {
 }
 
 function cambiarRol(usuarioId, nuevoRol) {
+  const token = localStorage.getItem('token')
   const usuario = usuarios.value.find(u => u.id === usuarioId)
   if (!usuario) return
 
@@ -51,7 +53,7 @@ function cambiarRol(usuarioId, nuevoRol) {
       const data = await res.json()
       if (!data.success) throw new Error(data.message || 'Error al actualizar el rol.')
 
-      usuario.rol = nuevoRol // actualizar localmente
+      usuario.rol = nuevoRol
     })
     .catch(err => {
       error.value = err.message
@@ -65,6 +67,7 @@ function pedirConfirmacion(usuario) {
 }
 
 function confirmarEliminacion() {
+  const token = localStorage.getItem('token')
   if (!usuarioAEliminar.value) return
 
   fetch(`http://localhost/science/api/usuarios/delete_usuario.php?id=${usuarioAEliminar.value.id}`, {
@@ -84,18 +87,27 @@ function confirmarEliminacion() {
 }
 
 onMounted(() => {
+  const token = localStorage.getItem('token')
+
   if (!token) {
-    error.value = 'No hay token de autenticación. Por favor, inicia sesión.'
+    router.push('/')
     return
   }
 
+  let decoded
   try {
-    const decoded = jwtDecode(token)
-    usuarioAutenticadoId.value = decoded.id
+    decoded = jwtDecode(token)
   } catch (e) {
-    error.value = 'Token inválido'
+    router.push('/')
     return
   }
+
+  if (decoded.rol !== 'admin') {
+    router.push('/')
+    return
+  }
+
+  usuarioAutenticadoId.value = decoded.id
 
   fetch('http://localhost/science/api/usuarios/get_all_usuario.php', {
     headers: { 'Authorization': 'Bearer ' + token }
@@ -166,7 +178,6 @@ onMounted(() => {
         </tbody>
       </table>
 
-      <!-- Paginación -->
       <nav class="mt-3 d-flex justify-content-center">
         <ul class="pagination">
           <li class="page-item" :class="{ disabled: paginaActual === 1 }">
@@ -191,7 +202,6 @@ onMounted(() => {
       No hay usuarios que coincidan con la búsqueda.
     </p>
 
-    <!-- Modal de confirmación -->
     <div class="modal fade" id="confirmarEliminarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

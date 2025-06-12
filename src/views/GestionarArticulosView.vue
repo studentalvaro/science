@@ -1,5 +1,27 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { jwtDecode } from 'jwt-decode'
+
+// 🔒 Control de acceso
+const router = useRouter()
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+  if (!token) {
+    router.push('/')
+    return
+  }
+
+  try {
+    const usuario = jwtDecode(token)
+    if (usuario.rol !== 'admin') {
+      router.push('/')
+    }
+  } catch (e) {
+    router.push('/')
+  }
+})
 
 const articulos = ref([])
 const categorias = ref([])
@@ -126,6 +148,7 @@ onMounted(() => {
   obtenerCategorias()
 })
 </script>
+
 
 <template>
   <div class="container mt-5">

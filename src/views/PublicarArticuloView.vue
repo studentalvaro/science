@@ -1,6 +1,30 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { jwtDecode } from 'jwt-decode'
+
+// 🔒 Control de acceso
+const router = useRouter()
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+
+  if (!token) {
+    router.push('/')
+    return
+  }
+
+  try {
+    const usuario = jwtDecode(token)
+    if (!['admin', 'autor'].includes(usuario.rol)) {
+      router.push('/')
+      return
+    }
+    autor_id.value = usuario.id
+  } catch (e) {
+    router.push('/')
+  }
+})
 
 const titular = ref('')
 const categoria_id = ref('')
@@ -14,17 +38,6 @@ const autor_id = ref(null)
 
 onMounted(() => {
   const token = localStorage.getItem('token')
-
-  if (token) {
-    try {
-      const decoded = jwtDecode(token)
-      autor_id.value = decoded.id
-    } catch (e) {
-      mensaje.value = 'Token inválido'
-      colorMensaje.value = 'red'
-      return
-    }
-  }
 
   fetch('http://localhost/science/api/categorias/obtener_categorias.php', {
     headers: {
@@ -81,7 +94,7 @@ function publicarArticulo() {
     return
   }
 
-  categoria_id.value = categoriaElegida.id // Confirmar ID real
+  categoria_id.value = categoriaElegida.id
 
   const formData = new FormData()
   formData.append('titular', titular.value)
@@ -93,14 +106,13 @@ function publicarArticulo() {
     formData.append('archivo_pdf', archivo_pdf.value)
   }
 
-fetch('http://localhost/science/api/articulos/crear_articulo.php', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
-  },
-  body: formData
-})
-
+  fetch('http://localhost/science/api/articulos/crear_articulo.php', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    },
+    body: formData
+  })
     .then(res => res.json())
     .then(data => {
       mensaje.value = data.message
@@ -120,6 +132,7 @@ fetch('http://localhost/science/api/articulos/crear_articulo.php', {
     })
 }
 </script>
+
 
 <template>
   <div class="container mt-5">

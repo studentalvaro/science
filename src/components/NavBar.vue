@@ -57,7 +57,8 @@ onMounted(() => {
           <li class="nav-item"><RouterLink to="/articulos" class="nav-link fw-bold text-white mx-2" active-class="nav-link-active">Artículos</RouterLink></li>
           <li class="nav-item"><RouterLink to="/aboutus" class="nav-link fw-bold text-white mx-2" active-class="nav-link-active">Sobre nosotros</RouterLink></li>
           <li class="nav-item"><RouterLink to="/contacto" class="nav-link fw-bold text-white mx-2" active-class="nav-link-active">Contacto</RouterLink></li>
-          <li class="nav-item"><RouterLink to="/creararticulo" class="nav-link fw-bold text-white mx-2" active-class="nav-link-active">Crear Artículo</RouterLink></li>
+          <li class="nav-item"><RouterLink to="/creararticulo" class="nav-link fw-bold text-white mx-2" active-class="nav-link-active">Publicar Articulo</RouterLink></li>
+
         </ul>
 
         <!-- Lector -->

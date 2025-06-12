@@ -1,5 +1,27 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { jwtDecode } from 'jwt-decode'
+
+const router = useRouter()
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+
+  if (!token) {
+    router.push('/')
+    return
+  }
+
+  try {
+    const usuario = jwtDecode(token)
+    if (usuario.rol !== 'admin') {
+      router.push('/')
+    }
+  } catch (e) {
+    router.push('/')
+  }
+})
 
 const categorias = ref([])
 const categoriaSeleccionada = ref(null)
@@ -164,6 +186,7 @@ function mostrarMensajeExito(texto) {
   }, 3000)
 }
 </script>
+
 
 <template>
   <div class="container mt-5">

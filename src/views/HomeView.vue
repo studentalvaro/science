@@ -77,7 +77,7 @@ onMounted(() => {
                     <a :href="'http://localhost/science/' + articulo.archivo_pdf"
                       target="_blank"
                       class="btn btn-outline-primary btn-sm rounded-pill px-4">
-                      Leer artículo
+                      Leer artículo 📄
                     </a>
                   </template>
                   <template v-else>

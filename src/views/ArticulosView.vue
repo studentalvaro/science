@@ -35,7 +35,6 @@ onMounted(() => {
 })
 
 const categorias = computed(() => {
-  // Extrae categorías únicas de los artículos
   const set = new Set()
   articulos.value.forEach(a => {
     if (a.categoria) set.add(a.categoria)
@@ -60,9 +59,7 @@ const articulosFiltrados = computed(() => {
   return lista.sort((a, b) => {
     const fechaA = new Date(a.fecha_publicacion)
     const fechaB = new Date(b.fecha_publicacion)
-    return ordenDescendente.value
-      ? fechaB - fechaA
-      : fechaA - fechaB
+    return ordenDescendente.value ? fechaB - fechaA : fechaA - fechaB
   })
 })
 
@@ -129,12 +126,23 @@ function cambiarPagina(nuevaPagina) {
           </p>
         </div>
         <div class="mt-auto d-flex justify-content-end align-items-end w-100" style="position: absolute; right: 24px; bottom: 24px;">
-          <button
-            class="btn btn-outline-primary btn-sm rounded-pill px-4"
-            @click="token ? window.open('http://localhost/science/' + articulo.archivo_pdf, '_blank') : router.push('/login')"
-          >
-            {{ token ? 'Leer artículo' : 'Inicia sesión para leer' }}
-          </button>
+          <template v-if="token">
+            <a
+              :href="'http://localhost/science/' + articulo.archivo_pdf"
+              target="_blank"
+              class="btn btn-outline-primary btn-sm rounded-pill px-4"
+            >
+              Leer artículo 📄
+            </a>
+          </template>
+          <template v-else>
+            <button
+              class="btn btn-outline-primary btn-sm rounded-pill px-4"
+              @click="router.push('/login')"
+            >
+              Inicia sesión para leer
+            </button>
+          </template>
         </div>
       </li>
     </ul>
