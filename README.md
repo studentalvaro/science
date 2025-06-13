@@ -91,5 +91,5 @@ Proyecto de fin de ciclo formativo. Código abierto para fines educativos y de d
 
 ## ✍ Autor
 
-Desarrollado por [Tu Nombre] – [@tu_usuario](https://github.com/tu_usuario)  
+Desarrollado por [Álvaro Beltrán] – [studentalvaro](https://github.com/tu_usuario)  
 DAW · Proyecto Final · 2025
