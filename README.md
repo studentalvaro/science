@@ -1,46 +1,95 @@
-# 🧠 The Science Hub
 
-Proyecto desarrollado por **Álvaro Beltrán Santiago** como trabajo final del Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (IES Virgen del Carmen, Jaén).
+# 🌐 The Science Hub
 
----
-
-## 📚 Descripción del proyecto
-
-**The Science Hub** es una plataforma web orientada a la **difusión y consulta de contenido científico**, diseñada con el objetivo de facilitar el acceso abierto a artículos académicos y promover la divulgación del conocimiento en un entorno claro, accesible y ordenado.
-
-El proyecto permite a los usuarios registrarse, iniciar sesión, consultar artículos clasificados por categorías científicas, y a los autores, publicar sus propios trabajos en formato PDF. La administración del sistema permite la gestión de categorías y usuarios, según el rol.
+**The Science Hub** es una plataforma web desarrollada como proyecto final del ciclo de Desarrollo de Aplicaciones Web (DAW).  
+Su objetivo es facilitar la publicación, consulta y difusión de artículos científicos por parte de diferentes tipos de usuarios.
 
 ---
 
-## 🎯 Funcionalidades principales
+## 🧠 Funcionalidades principales
 
-- Registro e inicio de sesión mediante autenticación con **JWT**.
-- Consulta de artículos científicos, con filtro por categorías.
-- Subida y almacenamiento de artículos en PDF.
-- Roles diferenciados: lector, autor y administrador.
-- Gestión de artículos, usuarios y categorías según permisos.
-- Interfaz responsive adaptada a todos los dispositivos.
-- Comunicación frontend-backend vía API REST.
-
----
-
-## 🛠️ Tecnologías utilizadas
-
-- **Vue 3**: framework JavaScript para la creación del frontend.
-- **Bootstrap 5**: sistema de diseño para interfaz responsive.
-- **PHP puro**: lenguaje del backend para lógica de negocio.
-- **MySQL**: sistema de gestión de bases de datos relacional.
-- **XAMPP**: entorno local con Apache y MySQL.
-- **JWT (JSON Web Tokens)**: sistema de autenticación sin estado.
-- **Mailtrap**: simulación de envío de correos electrónicos en entorno de desarrollo.
+- Registro e inicio de sesión con autenticación mediante JWT
+- Gestión de usuarios con diferentes roles: lector, autor y administrador
+- Publicación de artículos científicos en formato PDF
+- Visualización y lectura de artículos desde la página principal
+- Filtrado de artículos por categorías
+- Gestión de categorías por parte del administrador
+- Sistema de subida de archivos
+- Interfaz moderna, responsive y minimalista usando Vue.js + Bootstrap 5
+- Comunicación segura entre frontend y backend
 
 ---
 
-[!NOTE]
-Este proyecto ha sido desarrollado con fines académicos como demostración de conocimientos adquiridos en backend (PHP y MySQL), frontend (Vue y Bootstrap), y seguridad (JWT).
+## 🧱 Tecnologías utilizadas
 
-[!TIP]
-El backend puede probarse fácilmente usando herramientas como Postman o Thunder Client.
+### 🔹 Frontend
+- **Vue.js 3** (Composition API)
+- **Bootstrap 5**
+- **JavaScript**, **HTML5**, **CSS3**
 
-[!CAUTION]
-El sistema requiere tener levantado el entorno local con Apache y MySQL (por ejemplo, con XAMPP) y ajustar las rutas si se despliega en un servidor real.
+### 🔹 Backend
+- **PHP** (sin frameworks)
+- **API RESTful**
+- **JWT (Firebase/php-jwt)** para autenticación
+- **MySQL** como base de datos
+- **Composer** para gestión de dependencias
+- **Mailtrap** para pruebas de envío de correos
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/studentalvaro/science
+```
+
+### 2. Backend
+- Configura un servidor local (como XAMPP)
+- Coloca la carpeta `backend/` en `htdocs`
+- Importa el archivo `science_hub.sql` en tu base de datos MySQL
+- Instala dependencias con Composer:
+```bash
+composer install
+```
+
+### 3. Frontend
+- Ve a la carpeta `frontend/`
+- Instala dependencias:
+```bash
+npm install
+```
+- Ejecuta la aplicación:
+```bash
+npm run dev
+```
+
+---
+
+## 👤 Roles en el sistema
+
+- **Lector**: puede ver y descargar artículos
+- **Autor**: puede publicar y gestionar sus artículos
+- **Administrador**: gestiona usuarios, categorías y todo el contenido
+
+---
+
+## 📌 Estado actual
+
+✅ Funcionalidad completa  
+✅ Seguridad básica implementada  
+✅ UI responsive terminada  
+🛠 Próximas mejoras: sistema de comentarios, buscador avanzado, integración con APIs externas
+
+---
+
+## 🧾 Licencia
+
+Proyecto de fin de ciclo formativo. Código abierto para fines educativos y de demostración.
+
+---
+
+## ✍ Autor
+
+Desarrollado por [Tu Nombre] – [@tu_usuario](https://github.com/tu_usuario)  
+DAW · Proyecto Final · 2025
